@@ -36,6 +36,8 @@
             this.btncopy = new System.Windows.Forms.Button();
             this.rbtnQueryText = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.ckbAtSign = new System.Windows.Forms.CheckBox();
+            this.ckbComma = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txt_from
@@ -69,6 +71,7 @@
             this.btnplit.TabIndex = 4;
             this.btnplit.Text = "Split";
             this.btnplit.UseVisualStyleBackColor = true;
+            this.btnplit.Click += new System.EventHandler(this.btnplit_Click);
             // 
             // btncopy
             // 
@@ -84,7 +87,7 @@
             // 
             this.rbtnQueryText.AutoSize = true;
             this.rbtnQueryText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnQueryText.Location = new System.Drawing.Point(112, 13);
+            this.rbtnQueryText.Location = new System.Drawing.Point(127, 13);
             this.rbtnQueryText.Name = "rbtnQueryText";
             this.rbtnQueryText.Size = new System.Drawing.Size(231, 29);
             this.rbtnQueryText.TabIndex = 5;
@@ -102,11 +105,33 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Option";
             // 
+            // ckbAtSign
+            // 
+            this.ckbAtSign.AutoSize = true;
+            this.ckbAtSign.Location = new System.Drawing.Point(127, 48);
+            this.ckbAtSign.Name = "ckbAtSign";
+            this.ckbAtSign.Size = new System.Drawing.Size(103, 21);
+            this.ckbAtSign.TabIndex = 7;
+            this.ckbAtSign.Text = "At Sign (@)";
+            this.ckbAtSign.UseVisualStyleBackColor = true;
+            // 
+            // ckbComma
+            // 
+            this.ckbComma.AutoSize = true;
+            this.ckbComma.Location = new System.Drawing.Point(236, 48);
+            this.ckbComma.Name = "ckbComma";
+            this.ckbComma.Size = new System.Drawing.Size(95, 21);
+            this.ckbComma.TabIndex = 7;
+            this.ckbComma.Text = "Comma (,)";
+            this.ckbComma.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 551);
+            this.Controls.Add(this.ckbComma);
+            this.Controls.Add(this.ckbAtSign);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rbtnQueryText);
             this.Controls.Add(this.btncopy);
@@ -115,6 +140,7 @@
             this.Controls.Add(this.txt_from);
             this.Name = "Main";
             this.Text = "WFA-SplitText";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,6 +155,8 @@
         private System.Windows.Forms.Button btncopy;
         private System.Windows.Forms.RadioButton rbtnQueryText;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox ckbAtSign;
+        private System.Windows.Forms.CheckBox ckbComma;
     }
 }
 

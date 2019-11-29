@@ -1,1 +1,9 @@
 E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\bin\Debug\WFA-SplitText.exe.config
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\bin\Debug\WFA-SplitText.exe
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\bin\Debug\WFA-SplitText.pdb
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\obj\Debug\WFA-SplitText.csprojResolveAssemblyReference.cache
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\obj\Debug\WFA_SplitText.Main.resources
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\obj\Debug\WFA_SplitText.Properties.Resources.resources
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\obj\Debug\WFA-SplitText.csproj.GenerateResource.Cache
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\obj\Debug\WFA-SplitText.exe
+E:\WindownFormApplication\WFA-SplitText\WFA-SplitText\WFA-SplitText\obj\Debug\WFA-SplitText.pdb
