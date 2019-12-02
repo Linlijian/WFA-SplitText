@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ckbAtSign = new System.Windows.Forms.CheckBox();
             this.ckbComma = new System.Windows.Forms.CheckBox();
+            this.ckbDelLastComma = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txt_from
@@ -124,12 +125,24 @@
             this.ckbComma.TabIndex = 7;
             this.ckbComma.Text = "Comma (,)";
             this.ckbComma.UseVisualStyleBackColor = true;
+            this.ckbComma.CheckedChanged += new System.EventHandler(this.ckbComma_CheckedChanged);
+            // 
+            // ckbDelLastComma
+            // 
+            this.ckbDelLastComma.AutoSize = true;
+            this.ckbDelLastComma.Location = new System.Drawing.Point(127, 75);
+            this.ckbDelLastComma.Name = "ckbDelLastComma";
+            this.ckbDelLastComma.Size = new System.Drawing.Size(171, 21);
+            this.ckbDelLastComma.TabIndex = 8;
+            this.ckbDelLastComma.Text = "Delete Last Comma (,)";
+            this.ckbDelLastComma.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 551);
+            this.Controls.Add(this.ckbDelLastComma);
             this.Controls.Add(this.ckbComma);
             this.Controls.Add(this.ckbAtSign);
             this.Controls.Add(this.label1);
@@ -157,6 +170,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox ckbAtSign;
         private System.Windows.Forms.CheckBox ckbComma;
+        private System.Windows.Forms.CheckBox ckbDelLastComma;
     }
 }
 

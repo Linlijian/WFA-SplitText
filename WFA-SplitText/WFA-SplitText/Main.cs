@@ -19,58 +19,101 @@ namespace WFA_SplitText
 
         private void Main_Load(object sender, EventArgs e)
         {
-            
+            ckbDelLastComma.Enabled = false;
         }
 
         private void btnplit_Click(object sender, EventArgs e)
         {
-            if(rbtnQueryText.Checked == true)
+            var model = new SplitModel();
+            SetDefualtData(model);
+
+            if (rbtnQueryText.Checked == true)
             {
-                bool first = true;
-                string txt = txt_from.Text;
-                string[] txtas = null;
-                string[] after = null;
-
-                txtas = txt.Replace("\r\n", "").Replace(",", "").Split(null);
-                after = Array.FindAll(txtas, element => element.StartsWith("@", StringComparison.Ordinal));
-                if (ckbAtSign.Checked == true)
-                {
-                    foreach (var intem in after)
-                    {
-                        if (first)
-                        {
-                            txt_to.Text = intem + "\r\n";
-                            first = false;
-                        }
-                        else
-                        {
-                            txt_to.Text += intem + "\r\n";
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var intem in after)
-                    {
-                        if (first)
-                        {
-                            txt_to.Text = intem.Replace("@", "") + "\r\n";
-                            first = false;
-                        }
-                        else
-                        {
-                            txt_to.Text += intem.Replace("@", "") + "\r\n";
-                        }
-                    }
-                }
-
-                
-
+                FetchData2Output(model);
             }
             else
             {
                 MessageBox.Show("please check option", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        private void ckbComma_CheckedChanged(object sender, EventArgs e)
+        {
+            if(ckbComma.Checked == true)
+            {
+                ckbDelLastComma.Enabled = true;
+            }
+            else
+            {
+                ckbDelLastComma.Enabled = false;
+                ckbDelLastComma.Checked = false;
+            }
+        }
+
+        private SplitModel SetDefualtData(SplitModel model)
+        {
+            model.FirstLoop = true;
+            model.StringText = txt_from.Text;
+            model.TextArea = model.StringText.Replace("\r\n", "").Replace(",", "").Split(null);
+            model.TextFindAll = Array.FindAll(model.TextArea, element => element.StartsWith("@", StringComparison.Ordinal));
+
+            return model;
+        }
+        private void FetchData2Output(SplitModel model)
+        {
+            int a = ckbAtSign.Checked ? 112 : 0;
+            a += ckbComma.Checked ? 113 : 0;
+            string last = model.TextFindAll.Last();
+
+            foreach (var intem in model.TextFindAll)
+            {
+                if (model.FirstLoop)
+                {
+                    txt_to.Text = CaseOutput(intem, a);
+                    model.FirstLoop = false;
+                }
+                else
+                {
+                    txt_to.Text += CaseOutput(intem, a);
+                }
+
+                if (last.Equals(intem) && ckbDelLastComma.Checked)
+                {
+                    DeleteLastComma();
+                }
+            }
+        }
+        private string CaseOutput(string txt, int intCase)
+        {
+            string t = string.Empty;
+            string r = string.Empty;
+            char c;
+            int a = txt.Length;
+            if (intCase == 112) //AtSign
+            {
+                t = txt + "\r\n";
+            }
+            else if (intCase == 0) // default
+            {
+                t = txt.Replace("@", "") + "\r\n";
+            }
+            else if (intCase == 113) // comma
+            {
+                t = txt.Replace("@", "") + ',' + "\r\n";
+            }
+            else if (intCase == 225) // comma + AtSign
+            {
+                //c = txt[txt.Length - 1];
+                t = txt + ',' + "\r\n";
+            }
+
+            return t;
+        }
+        private void DeleteLastComma()
+        {
+            string t = txt_to.Text;
+            txt_to.Text = t.Substring(0, t.Length - 3);
+        }
+
+        
     }
 }
