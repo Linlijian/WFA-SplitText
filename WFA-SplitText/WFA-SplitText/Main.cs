@@ -17,48 +17,22 @@ namespace WFA_SplitText
             InitializeComponent();
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        #region Method
+        private SplitModel SetDefualtData(SplitModel model, string mode)
         {
-            ckbDelLastComma.Enabled = false;
-        }
-
-        private void btnplit_Click(object sender, EventArgs e)
-        {
-            var model = new SplitModel();
-            SetDefualtData(model);
-
-            if (rbtnQueryText.Checked == true)
+           if(mode == "QueryText")
             {
-                FetchData2Output(model);
+                model.FirstLoop = true;
+                model.StringText = txt_from.Text;
+                model.TextArea = model.StringText.Replace("\r\n", "").Replace(",", "").Split(null);
+                model.TextFindAll = Array.FindAll(model.TextArea, element => element.StartsWith("@", StringComparison.Ordinal));
             }
-            else
+            else if (mode == "AddParameter")
             {
-                MessageBox.Show("please check option", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                model.FirstLoop = true;
+                model.StringText = txt_from.Text;
+                model.TextArea = model.StringText.Replace("\r\n", " ").Split(null);
             }
-        }
-        private void ckbComma_CheckedChanged(object sender, EventArgs e)
-        {
-            if(ckbComma.Checked == true)
-            {
-                ckbDelLastComma.Enabled = true;
-            }
-            else
-            {
-                ckbDelLastComma.Enabled = false;
-                ckbDelLastComma.Checked = false;
-            }
-        }
-        private void btncopy_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(txt_to.Text);
-        }
-
-        private SplitModel SetDefualtData(SplitModel model)
-        {
-            model.FirstLoop = true;
-            model.StringText = txt_from.Text;
-            model.TextArea = model.StringText.Replace("\r\n", "").Replace(",", "").Split(null);
-            model.TextFindAll = Array.FindAll(model.TextArea, element => element.StartsWith("@", StringComparison.Ordinal));
 
             return model;
         }
@@ -90,15 +64,39 @@ namespace WFA_SplitText
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString() + " \r\nFix: Check input text in format querytext or null", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Check input text in format querytext or null", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void FetchData2AddParameter(SplitModel model)
+        {
+            try
+            {
+                string last = model.TextArea.Last();
+
+                foreach (var intem in model.TextArea)
+                {
+                    if (model.FirstLoop)
+                    {
+                        txt_to.Text = CaseOutput(intem, 119);
+                        model.FirstLoop = false;
+                    }
+                    else
+                    {
+                        if(!intem.IsNullOrEmpty())
+                            txt_to.Text += CaseOutput(intem, 119);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Check input text in format querytext or null", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private string CaseOutput(string txt, int intCase)
         {
             string t = string.Empty;
             string r = string.Empty;
-            char c;
-            int a = txt.Length;
+
             if (intCase == 112) //AtSign
             {
                 t = txt + "\r\n";
@@ -116,6 +114,10 @@ namespace WFA_SplitText
                 //c = txt[txt.Length - 1];
                 t = txt + ',' + "\r\n";
             }
+            else if (intCase == 119) // AddParameter
+            {
+                t = "parameters.AddParameter(\"" + txt + "\"" +", dto.Model." + txt + ");" + "\r\n";
+            }
 
             return t;
         }
@@ -123,6 +125,75 @@ namespace WFA_SplitText
         {
             string t = txt_to.Text;
             txt_to.Text = t.Substring(0, t.Length - 3);
+        }
+        #endregion
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            ckbDelLastComma.Enabled = false;
+            txt_to.Enabled = false;
+        }
+
+        private void btnplit_Click(object sender, EventArgs e)
+        {
+            var model = new SplitModel();            
+
+            if (rbtnQueryText.Checked == true)
+            {
+                SetDefualtData(model, "QueryText");
+                FetchData2Output(model);
+            }
+            else if(rbtnAddParameter.Checked == true)
+            {
+                SetDefualtData(model, "AddParameter");
+                FetchData2AddParameter(model);
+            }
+            else
+            {
+                MessageBox.Show("please check option", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void ckbComma_CheckedChanged(object sender, EventArgs e)
+        {
+            if(ckbComma.Checked == true)
+            {
+                ckbDelLastComma.Enabled = true;
+            }
+            else
+            {
+                ckbDelLastComma.Enabled = false;
+                ckbDelLastComma.Checked = false;
+            }
+        }
+        private void btncopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txt_to.Text);
+        }
+        private void rbtnAddParameter_CheckedChanged(object sender, EventArgs e)
+        {
+            ckbAtSign.Enabled = false;
+            ckbComma.Enabled = false;
+            ckbDelLastComma.Enabled = false;
+
+            ckbAtSign.Checked = false;
+            ckbComma.Checked = false;
+            ckbDelLastComma.Checked = false;
+        }
+
+        private void rbtnQueryText_CheckedChanged(object sender, EventArgs e)
+        {
+            ckbAtSign.Enabled = true;
+            ckbComma.Enabled = true;
+        }
+
+        private void btnPaste_Click(object sender, EventArgs e)
+        {
+            txt_from.Text = Clipboard.GetText();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txt_from.Clear();
         }
     }
 }

@@ -39,6 +39,9 @@
             this.ckbAtSign = new System.Windows.Forms.CheckBox();
             this.ckbComma = new System.Windows.Forms.CheckBox();
             this.ckbDelLastComma = new System.Windows.Forms.CheckBox();
+            this.rbtnAddParameter = new System.Windows.Forms.RadioButton();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnPaste = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txt_from
@@ -70,7 +73,7 @@
             this.btnplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnplit.Location = new System.Drawing.Point(12, 471);
             this.btnplit.Name = "btnplit";
-            this.btnplit.Size = new System.Drawing.Size(420, 73);
+            this.btnplit.Size = new System.Drawing.Size(253, 73);
             this.btnplit.TabIndex = 4;
             this.btnplit.Text = "Split";
             this.btnplit.UseVisualStyleBackColor = true;
@@ -98,6 +101,7 @@
             this.rbtnQueryText.TabStop = true;
             this.rbtnQueryText.Text = "QueryText2SingelText";
             this.rbtnQueryText.UseVisualStyleBackColor = true;
+            this.rbtnQueryText.CheckedChanged += new System.EventHandler(this.rbtnQueryText_CheckedChanged);
             // 
             // label1
             // 
@@ -140,15 +144,53 @@
             this.ckbDelLastComma.Text = "Delete Last Comma (,)";
             this.ckbDelLastComma.UseVisualStyleBackColor = true;
             // 
+            // rbtnAddParameter
+            // 
+            this.rbtnAddParameter.AutoSize = true;
+            this.rbtnAddParameter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnAddParameter.Location = new System.Drawing.Point(381, 13);
+            this.rbtnAddParameter.Name = "rbtnAddParameter";
+            this.rbtnAddParameter.Size = new System.Drawing.Size(209, 29);
+            this.rbtnAddParameter.TabIndex = 5;
+            this.rbtnAddParameter.TabStop = true;
+            this.rbtnAddParameter.Text = "Text2AddParameter";
+            this.rbtnAddParameter.UseVisualStyleBackColor = true;
+            this.rbtnAddParameter.CheckedChanged += new System.EventHandler(this.rbtnAddParameter_CheckedChanged);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Location = new System.Drawing.Point(271, 471);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(161, 37);
+            this.btnClear.TabIndex = 9;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnPaste
+            // 
+            this.btnPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPaste.Location = new System.Drawing.Point(271, 510);
+            this.btnPaste.Name = "btnPaste";
+            this.btnPaste.Size = new System.Drawing.Size(161, 34);
+            this.btnPaste.TabIndex = 10;
+            this.btnPaste.Text = "Paste";
+            this.btnPaste.UseVisualStyleBackColor = true;
+            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 551);
+            this.Controls.Add(this.btnPaste);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.ckbDelLastComma);
             this.Controls.Add(this.ckbComma);
             this.Controls.Add(this.ckbAtSign);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.rbtnAddParameter);
             this.Controls.Add(this.rbtnQueryText);
             this.Controls.Add(this.btncopy);
             this.Controls.Add(this.btnplit);
@@ -174,6 +216,9 @@
         private System.Windows.Forms.CheckBox ckbAtSign;
         private System.Windows.Forms.CheckBox ckbComma;
         private System.Windows.Forms.CheckBox ckbDelLastComma;
+        private System.Windows.Forms.RadioButton rbtnAddParameter;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnPaste;
     }
 }
 

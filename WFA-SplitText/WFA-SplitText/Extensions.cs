@@ -1,15 +1,20 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace WFA_SplitText
 {
-    class Extensions
+     public static class Extensions
     {
-        public void SetDefualtData(SplitModel model)
+        public static bool IsNullableType(Type type)
         {
-
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        }
+        public static bool IsNullOrEmpty(this object data)
+        {
+            return string.IsNullOrEmpty(Convert.ToString(data));
         }
     }
 }
