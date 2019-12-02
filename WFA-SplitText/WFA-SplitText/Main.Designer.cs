@@ -46,6 +46,7 @@
             this.txt_from.Location = new System.Drawing.Point(12, 135);
             this.txt_from.Multiline = true;
             this.txt_from.Name = "txt_from";
+            this.txt_from.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_from.Size = new System.Drawing.Size(420, 330);
             this.txt_from.TabIndex = 0;
             // 
@@ -60,6 +61,7 @@
             this.txt_to.Location = new System.Drawing.Point(468, 135);
             this.txt_to.Multiline = true;
             this.txt_to.Name = "txt_to";
+            this.txt_to.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_to.Size = new System.Drawing.Size(426, 330);
             this.txt_to.TabIndex = 0;
             // 
