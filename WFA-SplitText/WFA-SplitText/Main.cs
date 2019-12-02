@@ -48,6 +48,10 @@ namespace WFA_SplitText
                 ckbDelLastComma.Checked = false;
             }
         }
+        private void btncopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txt_to.Text);
+        }
 
         private SplitModel SetDefualtData(SplitModel model)
         {
@@ -60,26 +64,33 @@ namespace WFA_SplitText
         }
         private void FetchData2Output(SplitModel model)
         {
-            int a = ckbAtSign.Checked ? 112 : 0;
-            a += ckbComma.Checked ? 113 : 0;
-            string last = model.TextFindAll.Last();
-
-            foreach (var intem in model.TextFindAll)
+            try
             {
-                if (model.FirstLoop)
-                {
-                    txt_to.Text = CaseOutput(intem, a);
-                    model.FirstLoop = false;
-                }
-                else
-                {
-                    txt_to.Text += CaseOutput(intem, a);
-                }
+                int a = ckbAtSign.Checked ? 112 : 0;
+                a += ckbComma.Checked ? 113 : 0;
+                string last = model.TextFindAll.Last();
 
-                if (last.Equals(intem) && ckbDelLastComma.Checked)
+                foreach (var intem in model.TextFindAll)
                 {
-                    DeleteLastComma();
+                    if (model.FirstLoop)
+                    {
+                        txt_to.Text = CaseOutput(intem, a);
+                        model.FirstLoop = false;
+                    }
+                    else
+                    {
+                        txt_to.Text += CaseOutput(intem, a);
+                    }
+
+                    if (last.Equals(intem) && ckbDelLastComma.Checked)
+                    {
+                        DeleteLastComma();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + " \r\nFix: Check input text in format querytext or null", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private string CaseOutput(string txt, int intCase)
@@ -113,7 +124,5 @@ namespace WFA_SplitText
             string t = txt_to.Text;
             txt_to.Text = t.Substring(0, t.Length - 3);
         }
-
-        
     }
 }

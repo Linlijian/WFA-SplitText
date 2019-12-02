@@ -85,6 +85,7 @@
             this.btncopy.TabIndex = 3;
             this.btncopy.Text = "Copy";
             this.btncopy.UseVisualStyleBackColor = true;
+            this.btncopy.Click += new System.EventHandler(this.btncopy_Click);
             // 
             // rbtnQueryText
             // 
