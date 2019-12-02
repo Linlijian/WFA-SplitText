@@ -29,9 +29,20 @@ namespace WFA_SplitText
             }
             else if (mode == "AddParameter")
             {
-                model.FirstLoop = true;
-                model.StringText = txt_from.Text;
-                model.TextArea = model.StringText.Replace("\r\n", " ").Split(null);
+               if(ckbNomal.Checked == true)
+                {
+                    model.FirstLoop = true;
+                    model.StringText = txt_from.Text;
+                    model.TextArea = model.StringText.Replace("\r\n", " ").Split(null);
+                    model.TextFindAll = model.TextArea;
+                }
+                else
+                {
+                    model.FirstLoop = true;
+                    model.StringText = txt_from.Text;
+                    model.TextArea = model.StringText.Replace("\r\n", "").Replace(",", "").Replace("[", "").Replace("]", "").Split(null);
+                    model.TextFindAll = model.TextArea.Where(a => !a.IsNullOrEmpty()).ToArray();
+                }
             }
 
             return model;
@@ -71,9 +82,9 @@ namespace WFA_SplitText
         {
             try
             {
-                string last = model.TextArea.Last();
+                string last = model.TextFindAll.Last();
 
-                foreach (var intem in model.TextArea)
+                foreach (var intem in model.TextFindAll)
                 {
                     if (model.FirstLoop)
                     {
@@ -184,6 +195,19 @@ namespace WFA_SplitText
         {
             ckbAtSign.Enabled = true;
             ckbComma.Enabled = true;
+
+            if (rbtnQueryText.Checked == true)
+            {
+                ckbFromDB.Checked = false;
+                ckbNomal.Checked = false;
+                ckbFromDB.Enabled = false;
+                ckbNomal.Enabled = false;
+            }
+            else
+            {
+                ckbFromDB.Enabled = true;
+                ckbNomal.Enabled = true;
+            }
         }
 
         private void btnPaste_Click(object sender, EventArgs e)
@@ -194,6 +218,32 @@ namespace WFA_SplitText
         private void btnClear_Click(object sender, EventArgs e)
         {
             txt_from.Clear();
+        }
+
+        private void ckbNomal_CheckedChanged(object sender, EventArgs e)
+        {           
+            if(ckbNomal.Checked == true)
+            {
+                ckbFromDB.Enabled = false;
+                ckbFromDB.Checked = false;
+            }
+            else
+            {
+                ckbFromDB.Enabled = true;
+            }
+        }
+
+        private void ckbFromDB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbFromDB.Checked == true)
+            {
+                ckbNomal.Enabled = false;
+                ckbNomal.Checked = false;
+            }
+            else
+            {
+                ckbNomal.Enabled = true;
+            }
         }
     }
 }

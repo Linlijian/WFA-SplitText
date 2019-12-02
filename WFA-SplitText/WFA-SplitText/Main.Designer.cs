@@ -42,6 +42,8 @@
             this.rbtnAddParameter = new System.Windows.Forms.RadioButton();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnPaste = new System.Windows.Forms.Button();
+            this.ckbNomal = new System.Windows.Forms.CheckBox();
+            this.ckbFromDB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txt_from
@@ -179,11 +181,35 @@
             this.btnPaste.UseVisualStyleBackColor = true;
             this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
             // 
+            // ckbNomal
+            // 
+            this.ckbNomal.AutoSize = true;
+            this.ckbNomal.Location = new System.Drawing.Point(381, 48);
+            this.ckbNomal.Name = "ckbNomal";
+            this.ckbNomal.Size = new System.Drawing.Size(277, 21);
+            this.ckbNomal.TabIndex = 11;
+            this.ckbNomal.Text = "Nomal field (text from query text option)";
+            this.ckbNomal.UseVisualStyleBackColor = true;
+            this.ckbNomal.CheckedChanged += new System.EventHandler(this.ckbNomal_CheckedChanged);
+            // 
+            // ckbFromDB
+            // 
+            this.ckbFromDB.AutoSize = true;
+            this.ckbFromDB.Location = new System.Drawing.Point(381, 75);
+            this.ckbFromDB.Name = "ckbFromDB";
+            this.ckbFromDB.Size = new System.Drawing.Size(233, 21);
+            this.ckbFromDB.TabIndex = 12;
+            this.ckbFromDB.Text = "Field from DB ([field1],[field2],...)";
+            this.ckbFromDB.UseVisualStyleBackColor = true;
+            this.ckbFromDB.CheckedChanged += new System.EventHandler(this.ckbFromDB_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 551);
+            this.Controls.Add(this.ckbFromDB);
+            this.Controls.Add(this.ckbNomal);
             this.Controls.Add(this.btnPaste);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.ckbDelLastComma);
@@ -219,6 +245,8 @@
         private System.Windows.Forms.RadioButton rbtnAddParameter;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnPaste;
+        private System.Windows.Forms.CheckBox ckbNomal;
+        private System.Windows.Forms.CheckBox ckbFromDB;
     }
 }
 
